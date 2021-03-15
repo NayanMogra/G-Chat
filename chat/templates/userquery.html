@@ -1,0 +1,34 @@
+<!-- Template Inheritance -->
+{% extends "admin_layout.html" %}
+{% block content %}
+<center>
+<!-- Table to display the user's information with their registered query and the status of their queries either solved or unsolved by the admin -->
+<table class="table " style="margin-left:-117px ;font-size: 14px;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Query</th>
+        <th>Status</th>
+        <th>If Solved Click Here</th>    
+    </tr>
+    </thead>
+    {% for ans in query %}
+    <tbody>
+        <td>{{ans.name}}</td>
+        <td>{{ans.email}}</td>
+        <td>{{ans.phone}}</td>
+        <td>{{ans.query}}</td>
+        <!-- If the Query is solved it will show solved else it will show unsolved button -->
+        {% if ans.status =='Unsolved' %}
+            <td style="color: red;"><b>{{ans.status}}</b></td>
+            <td><a href="{{url_for('updatestatus', id=ans.id)}}" class = "w3-button w3-black">Solved</a>
+        {% else %}
+        <td style="color: green;"><b>{{ans.status}}</b></td>
+        {% endif%}
+    </tbody>
+    {% endfor %}
+  </table>
+</center>
+{% endblock content %}

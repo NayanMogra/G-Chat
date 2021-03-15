@@ -1,0 +1,73 @@
+<!-- Template Inheritance -->
+{% extends "admin_layout.html" %}
+{% block content %}
+    <!-- Form to update the registered question -->
+    <b><div class="content-section"  style="margin-top: 5%; border: 2px solid black; padding :50px;font-variant: small-caps;">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group" style="border: 0px;">
+                <legend class="border-bottom mb-4">Create Question</legend>
+                <div class="form-group">
+                    <!-- Sub_Ques_id Field -->
+                    {{ form.sub_ques_id.label(class="form-control-label") }}
+                    {% if form.sub_ques_id.errors %}
+                        {{ form.sub_ques_id(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.sub_ques_id.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.sub_ques_id(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                        <!-- Previous_Answer_id Field -->
+                        {{ form.perv_ans_id.label(class="form-control-label") }}
+                        {% if form.perv_ans_id.errors %}
+                            {{ form.perv_ans_id(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.perv_ans_id.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.perv_ans_id(class="form-control form-control-lg") }}
+                        {% endif %}
+                </div>
+                <div class="form-group">
+                        <!-- Next_Answer_id Field -->
+                        {{ form.next_ans_id.label(class="form-control-label") }}
+                        {% if form.next_ans_id.errors %}
+                            {{ form.next_ans_id(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.next_ans_id.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.next_ans_id(class="form-control form-control-lg") }}
+                        {% endif %}
+                </div>
+                <div class="form-group">
+                        <!-- Sub_Ques_Description Field -->
+                        {{ form.sub_ques_desc.label(class="form-control-label") }}
+                        {% if form.sub_ques_desc.errors %}
+                            {{ form.sub_ques_desc(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.sub_ques_desc.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.sub_ques_desc(class="form-control form-control-lg") }}
+                        {% endif %}
+                </div>
+             </fieldset>
+            </b>
+             <div class="form-group" style="margin-left:10px ;">
+                {{ form.submit(class="w3-btn w3-black") }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}

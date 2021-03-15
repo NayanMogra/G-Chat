@@ -1,0 +1,32 @@
+<!-- Template Inheritance -->
+{% extends "admin_layout.html" %}
+{% block content %}
+
+
+    <div class="content-section " style="margin-top: 5%; border: 2px solid black; padding :50px;font-variant: small-caps;"  >
+        <!-- Form to Register/create answer -->
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group" style="border: 0px;">
+                <b><legend class="border-bottom mb-4">Create Answer </legend><b>
+                <div class="form-group">
+                    <!-- Answer_Description Field -->
+                    <b>{{ form.ans_desc.label(class="form-control-label") }}</b>
+                    {% if form.ans_desc.errors %}
+                        {{ form.ans_desc(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.ans_desc.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.ans_desc(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group" style="margin-left:10px ;">
+                {{ form.submit(class="w3-btn w3-black") }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}
