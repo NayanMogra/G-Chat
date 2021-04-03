@@ -41,29 +41,39 @@ def get_bot_response():
     response = ""
     flag = 1
     userText = request.args.get('msg')
-           
-    sub = db.session.query(Sub_ques).filter(and_(Sub_ques.perv_ans_id == a_id.id , Sub_ques.sub_ques_id == int(userText))).first()
-    if(sub):
-        a_id.id = sub.next_ans_id
-        ans = db.session.query(Ans).filter(Ans.id == sub.next_ans_id).first()
-        sub = db.session.query(Sub_ques).filter(Sub_ques.perv_ans_id == a_id.id).all()
-        response += ans.ans_desc
-        response += "<br>"
-        for ques in sub:
-            response += "<b>" + str(flag) + " " + ques.sub_ques_desc + "</b><br>"
-            flag += 1
-            print(response)
-        
-    else:
+    try:      
+        sub = db.session.query(Sub_ques).filter(and_(Sub_ques.perv_ans_id == a_id.id , Sub_ques.sub_ques_id == int(userText))).first()
+        if(sub):
+            a_id.id = sub.next_ans_id
+            ans = db.session.query(Ans).filter(Ans.id == sub.next_ans_id).first()
+            sub = db.session.query(Sub_ques).filter(Sub_ques.perv_ans_id == a_id.id).all()
+            response += ans.ans_desc
+            response += "<br>"
+            for ques in sub:
+                response += "<b>" + str(flag) + " " + ques.sub_ques_desc + "</b><br>"
+                flag += 1
+            
+        else:
+            ans = db.session.query(Ans).filter(Ans.id == a_id.id).first()
+            response = "<h4 style = 'font-weight : bold;color : Red'> " + "Please enter the correct option" + "</h4> <br> <br>" + ans.ans_desc
+            sub = db.session.query(Sub_ques).filter(Sub_ques.perv_ans_id == a_id.id).all()
+            response += "<br>"
+            for ques in sub:
+                response += "<b>" + str(flag) + " " + ques.sub_ques_desc + "</b><br>"
+                flag += 1
+                print(response)
+
+    except :        
         ans = db.session.query(Ans).filter(Ans.id == a_id.id).first()
-        response = "<b>Please enter the correct option</b><br> <br>" + ans.ans_desc
+        response = "<h4 style = 'font-weight : bold; color : Red'> " + "Please enter the correct option" + "</h4> <br> <br>" + ans.ans_desc
         sub = db.session.query(Sub_ques).filter(Sub_ques.perv_ans_id == a_id.id).all()
         response += "<br>"
         for ques in sub:
             response += "<b>" + str(flag) + " " + ques.sub_ques_desc + "</b><br>"
             flag += 1
             print(response)
-        
+
+
     return response
 
 #dispaly the admin page after admin successfully log in

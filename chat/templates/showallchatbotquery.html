@@ -2,27 +2,29 @@
 {% extends "admin_layout.html" %}
 {% block content %}
 
-<!-- Table to show all the chatbot queries -->
-<table class="table " style="margin-left:-117px ;font-size: 14px;">
-    <thead>
-      <tr>
-        {% for desc in dec_list %}
-        
-            <th>{{desc}}</th>
-        {% endfor %}
-        <th>Update Answer</th>
-        <th>Update Question</th>    
-    </tr>
-    </thead>
-    {% for ans in ls %}
-    <tbody>
-        {% for a in ans%}        
-        <td>{{a}}</td>
-        {%endfor%}
-        <td style="border: 0px;"><a href="{{ url_for('updateans', id = ans[0])  }}" class="w3-button w3-black">Update Answer</a></td>
-        <td style="border: 0px;"><a href="{{ url_for('updateques' , id = ans[2]) }}" class="w3-button w3-black">Update Question</a></td>
+  <!-- Table to show all the chatbot queries -->
+  <div class = "table-responsive" style = "overflow-x:auto ; max-height:600px; width : 100%;margin : 10px; border: 0px solid black ">  
+    <table class="table " style="font-size: 14px;" style = "width : 100%">
+      <thead>
+        <tr scope="row">
+          {% for desc in dec_list %}
+          
+              <th>{{desc}}</th>
+          {% endfor %}
+          <th>Update Answer</th>
+          <th>Update Question</th>    
+      </tr>
+      </thead>
+      {% for ans in ls %}
+      <tbody>
+          {% for a in ans%}        
+          <td scope="col">{{a}}</td>
+          {%endfor%}
+          <td style="border: 0px;" scope="col"><a href="{{ url_for('updateans', id = ans[0])  }}" class="w3-button w3-black">Update Answer</a></td>
+          <td style="border: 0px;" scope="col"><a href="{{ url_for('updateques' , id = ans[2]) }}" class="w3-button w3-black">Update Question</a></td>
 
-    </tbody>
-    {% endfor %}
-  </table>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
 {% endblock content %}
